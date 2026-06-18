@@ -1,5 +1,5 @@
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -23,7 +23,7 @@ function RootComponent() {
           <Link
             to="/"
             activeProps={{
-              className: 'font-bold text-blue-600',
+              className: "font-bold text-blue-600",
             }}
             activeOptions={{ exact: true }}
             className="hover:text-blue-600 transition-colors"
@@ -33,7 +33,7 @@ function RootComponent() {
           <Link
             to="/workout"
             activeProps={{
-              className: 'font-bold text-blue-600',
+              className: "font-bold text-blue-600",
             }}
             className="hover:text-blue-600 transition-colors"
           >

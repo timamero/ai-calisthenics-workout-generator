@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-function Home() {
+export function Home() {
   return (
     <Container size="lg" py="xl">
       <Stack gap="xl">

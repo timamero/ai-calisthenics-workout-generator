@@ -1,72 +1,84 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  Container,
+  Title,
+  Text,
+  Stack,
+  Paper,
+  Select,
+  NumberInput,
+  Button,
+} from "@mantine/core";
+import { useState } from "react";
 
-export const Route = createFileRoute('/workout')({
+export const Route = createFileRoute("/workout")({
   component: Workout,
 });
 
 function Workout() {
+  const [fitnessLevel, setFitnessLevel] = useState<string | null>("Beginner");
+  const [duration, setDuration] = useState<number | string>(30);
+  const [focusArea, setFocusArea] = useState<string | null>("Full Body");
+
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold mb-4">Workout Generator</h1>
-      <p className="text-gray-600 mb-6">
-        Create your personalized calisthenics workout routine.
-      </p>
+    <Container size="lg" py="xl">
+      <Stack gap="xl">
+        <Stack gap="sm">
+          <Title order={1}>Workout Generator</Title>
+          <Text c="dimmed" size="md">
+            Create your personalized calisthenics workout routine.
+          </Text>
+        </Stack>
 
-      <div className="space-y-6">
-        <div className="p-6 border rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Workout Configuration</h2>
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Fitness Level
-              </label>
-              <select className="w-full px-3 py-2 border rounded-lg">
-                <option>Beginner</option>
-                <option>Intermediate</option>
-                <option>Advanced</option>
-              </select>
-            </div>
+        <Paper p="lg" radius="md" withBorder>
+          <Stack gap="md">
+            <Title order={2} size="lg">
+              Workout Configuration
+            </Title>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Duration (minutes)
-              </label>
-              <input
-                type="number"
-                min="15"
-                max="120"
-                defaultValue="30"
-                className="w-full px-3 py-2 border rounded-lg"
-              />
-            </div>
+            <form>
+              <Stack gap="md">
+                <Select
+                  label="Fitness Level"
+                  placeholder="Select fitness level"
+                  value={fitnessLevel}
+                  onChange={setFitnessLevel}
+                  data={["Beginner", "Intermediate", "Advanced"]}
+                  searchable
+                />
 
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Focus Area
-              </label>
-              <select className="w-full px-3 py-2 border rounded-lg">
-                <option>Full Body</option>
-                <option>Upper Body</option>
-                <option>Lower Body</option>
-                <option>Core</option>
-              </select>
-            </div>
+                <NumberInput
+                  label="Duration (minutes)"
+                  placeholder="Enter duration"
+                  value={duration}
+                  onChange={setDuration}
+                  min={15}
+                  max={120}
+                />
 
-            <button
-              type="submit"
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Generate Workout
-            </button>
-          </form>
-        </div>
+                <Select
+                  label="Focus Area"
+                  placeholder="Select focus area"
+                  value={focusArea}
+                  onChange={setFocusArea}
+                  data={["Full Body", "Upper Body", "Lower Body", "Core"]}
+                  searchable
+                />
 
-        <div className="p-6 border rounded-lg bg-gray-50">
-          <p className="text-gray-600">
+                <Button type="submit" fullWidth size="md">
+                  Generate Workout
+                </Button>
+              </Stack>
+            </form>
+          </Stack>
+        </Paper>
+
+        <Paper p="lg" radius="md" bg="gray.0" withBorder>
+          <Text c="dimmed" ta="center">
             Your generated workout will appear here after you submit the form.
-          </p>
-        </div>
-      </div>
-    </div>
+          </Text>
+        </Paper>
+      </Stack>
+    </Container>
   );
 }

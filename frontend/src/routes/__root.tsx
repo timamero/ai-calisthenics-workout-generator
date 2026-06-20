@@ -1,16 +1,23 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Box, Container, Group, NavLink, Stack, Text } from "@mantine/core";
 
 export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: () => {
     return (
-      <div className="p-4">
-        <p className="text-lg font-semibold">This page does not exist</p>
-        <Link to="/" className="text-blue-600 hover:underline">
-          Start Over
-        </Link>
-      </div>
+      <Container size="lg" py="xl">
+        <Stack gap="md">
+          <Text size="lg" fw={600}>
+            This page does not exist
+          </Text>
+          <Link to="/" className="mantine-UnstyledButton-root">
+            <Text c="blue" td="underline">
+              Start Over
+            </Text>
+          </Link>
+        </Stack>
+      </Container>
     );
   },
 });
@@ -18,32 +25,34 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
-      <div className="p-4 border-b">
-        <nav className="flex gap-4 text-lg">
-          <Link
+      <Box height={60} px="md" py="xs" withBorder>
+        <Group justify="flex-start" gap="lg" h="100%">
+          <NavLink
+            component={Link}
             to="/"
+            label="Home"
             activeProps={{
-              className: "font-bold text-blue-600",
+              fw: 700,
+              c: "blue",
             }}
             activeOptions={{ exact: true }}
-            className="hover:text-blue-600 transition-colors"
-          >
-            Home
-          </Link>
-          <Link
+          />
+          <NavLink
+            component={Link}
             to="/workout"
+            label="Workout"
             activeProps={{
-              className: "font-bold text-blue-600",
+              fw: 700,
+              c: "blue",
             }}
-            className="hover:text-blue-600 transition-colors"
-          >
-            Workout
-          </Link>
-        </nav>
-      </div>
+          />
+        </Group>
+      </Box>
 
-      <main className="p-4">
-        <Outlet />
+      <main>
+        <Container size="lg" py="lg">
+          <Outlet />
+        </Container>
       </main>
 
       <TanStackRouterDevtools position="bottom-right" initialIsOpen={false} />

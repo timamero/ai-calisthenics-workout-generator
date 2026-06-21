@@ -1,20 +1,20 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     // NOTE: Tanstack plugin MUST come before Vite React plugin
     tanstackRouter({
-      target: "react",
+      target: 'react',
       autoCodeSplitting: true,
     }),
     react(),
   ],
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: ["./vitest-setup.ts"],
+    environment: 'jsdom',
+    setupFiles: ['./vitest-setup.ts'],
   },
 });

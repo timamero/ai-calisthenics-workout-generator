@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const SetProgressionSchema = z.object({
   id: z.string(),
@@ -24,7 +24,7 @@ const ExerciseSchema = z.object({
   id: z.string(),
   exercise_id: z.number(),
   order: z.number(),
-  type: z.literal("exercise"),
+  type: z.literal('exercise'),
   tracked: z.array(z.string()),
   sets: z.array(SetSchema),
 });
@@ -32,7 +32,7 @@ const ExerciseSchema = z.object({
 const SupersetSchema = z.object({
   id: z.string(),
   order: z.number(),
-  type: z.literal("superset"),
+  type: z.literal('superset'),
   exercises: z.array(ExerciseSchema),
 });
 
@@ -40,7 +40,7 @@ const SectionSchema = z.object({
   id: z.string(),
   name: z.nullable(z.string()),
   order: z.number(),
-  type: z.literal("section"),
+  type: z.literal('section'),
   items: z.array(z.union([ExerciseSchema, SupersetSchema])),
 });
 

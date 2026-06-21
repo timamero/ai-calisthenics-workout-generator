@@ -23,7 +23,6 @@ export default defineConfig([
     },
     plugins: {
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
       prettier: prettier,
     },
     rules: {
@@ -32,7 +31,7 @@ export default defineConfig([
         'warn',
         { allowConstantExport: true },
       ],
-      'prettie/prettier': 'warn',
+      'prettier/prettier': 'warn',
     },
   },
 ]);

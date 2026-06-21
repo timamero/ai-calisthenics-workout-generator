@@ -1,6 +1,6 @@
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { Box, Container, Group, NavLink, Stack, Text } from "@mantine/core";
+import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { Box, Container, Group, NavLink, Stack, Text } from '@mantine/core';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -33,7 +33,7 @@ function RootComponent() {
             label="Home"
             activeProps={{
               fw: 700,
-              c: "blue",
+              c: 'blue',
             }}
             activeOptions={{ exact: true }}
           />
@@ -43,7 +43,7 @@ function RootComponent() {
             label="Workout"
             activeProps={{
               fw: 700,
-              c: "blue",
+              c: 'blue',
             }}
           />
         </Group>

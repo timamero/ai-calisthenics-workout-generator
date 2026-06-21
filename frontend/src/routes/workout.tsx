@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router';
 import {
   Container,
   Title,
@@ -8,17 +8,17 @@ import {
   Select,
   NumberInput,
   Button,
-} from "@mantine/core";
-import { useState } from "react";
+} from '@mantine/core';
+import { useState } from 'react';
 
-export const Route = createFileRoute("/workout")({
+export const Route = createFileRoute('/workout')({
   component: Workout,
 });
 
 function Workout() {
-  const [fitnessLevel, setFitnessLevel] = useState<string | null>("Beginner");
+  const [fitnessLevel, setFitnessLevel] = useState<string | null>('Beginner');
   const [duration, setDuration] = useState<number | string>(30);
-  const [focusArea, setFocusArea] = useState<string | null>("Full Body");
+  const [focusArea, setFocusArea] = useState<string | null>('Full Body');
 
   return (
     <Container size="lg" py="xl">
@@ -43,7 +43,7 @@ function Workout() {
                   placeholder="Select fitness level"
                   value={fitnessLevel}
                   onChange={setFitnessLevel}
-                  data={["Beginner", "Intermediate", "Advanced"]}
+                  data={['Beginner', 'Intermediate', 'Advanced']}
                   searchable
                 />
 
@@ -61,7 +61,7 @@ function Workout() {
                   placeholder="Select focus area"
                   value={focusArea}
                   onChange={setFocusArea}
-                  data={["Full Body", "Upper Body", "Lower Body", "Core"]}
+                  data={['Full Body', 'Upper Body', 'Lower Body', 'Core']}
                   searchable
                 />
 

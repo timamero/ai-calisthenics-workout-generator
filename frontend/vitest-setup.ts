@@ -1,8 +1,8 @@
-import "@testing-library/jest-dom/vitest";
+import '@testing-library/jest-dom/vitest';
 
 // Mock window.matchMedia
 // This mock is robust enough for most UI libraries that use matchMedia for color scheme, etc.
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,

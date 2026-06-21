@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Container, Title, Text, Stack, Paper } from "@mantine/core";
+import { createFileRoute } from '@tanstack/react-router';
+import { Container, Title, Text, Stack, Paper } from '@mantine/core';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: Home,
 });
 

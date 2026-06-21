@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface SampleUseStoreState {
   exercise: string;
@@ -6,6 +6,6 @@ interface SampleUseStoreState {
 }
 
 export const useStore = create<SampleUseStoreState>((set) => ({
-  exercise: "",
+  exercise: '',
   addExercise: (name) => set({ exercise: name }),
 }));

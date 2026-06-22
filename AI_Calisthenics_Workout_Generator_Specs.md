@@ -178,9 +178,14 @@ The application follows a monorepo structure with a clear separation between fro
 │   │   └── tests/          # Vitest + React Testing Library tests
 │   └── ...
 └── backend/                # FastAPI Python application
-    ├── api/                # REST API route handlers
-    ├── ai/                 # LLM integration logic (prompts, OpenAI calls)
-    ├── db/                 # Supabase read-only data access layer
+    ├── app/                
+    |   ├── api/            # REST API route handlers
+    |   |   ├── routes/     # REST API route handlers
+    |   |   ├── utils/      # Business logic separate from routes
+    |   ├── core/           # Configuration and security settings
+    |   ├── schemas/        # Pydantic models for data validation
+    |   ├── ai/             # LLM integration logic (prompts, OpenAI calls)
+    |   ├── db/             # Supabase read-only data access layer
     └── tests/              # pytest test suite
 ```
 

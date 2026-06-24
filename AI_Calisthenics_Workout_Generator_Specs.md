@@ -173,19 +173,21 @@ The application follows a monorepo structure with a clear separation between fro
 │   │   ├── components/     # UI components (some re-used from Torque)
 │   │   ├── pages/          # Route-level page components
 │   │   ├── store/          # Zustand state management
-│   │   ├── router/         # TanStack Router configuration
+│   │   ├── routes/         # TanStack Router tree and navigation configuration
 │   │   ├── schemas/        # Zod validation schemas
+│   │   ├── styles/         # Global styles and custom Mantine styles
+│   │   ├── utils/          # Shared helper functions, formatting utilities, and API clients
 │   │   └── tests/          # Vitest + React Testing Library tests
 │   └── ...
 └── backend/                # FastAPI Python application
     ├── app/                
-    |   ├── api/            # REST API route handlers
-    |   |   ├── routes/     # REST API route handlers
-    |   |   ├── utils/      # Business logic separate from routes
-    |   ├── core/           # Configuration and security settings
+    |   ├── api/            # API router initialization and dependency injection
+    |   |   ├── routes/     # REST API endpoints / route handlers
+    |   |   ├── utils/      # Shared helper functions and business logic utilities
+    |   ├── core/           # Global configuration, environment variables, and security
     |   ├── schemas/        # Pydantic models for data validation
     |   ├── ai/             # LLM integration logic (prompts, OpenAI calls)
-    |   ├── db/             # Supabase read-only data access layer
+    |   ├── db/             # Supabase client initialization and read-only data access layer
     └── tests/              # pytest test suite
 ```
 

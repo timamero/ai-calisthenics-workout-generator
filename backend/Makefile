@@ -9,12 +9,12 @@ help:
 
 # Run FastAPI in development mode
 dev:
-	fastapi dev
+	poetry run fastapi dev
 
 # Run code formatting and linting checks
 lint:
-	black . && flake8 .
+	poetry run black . && flake8 .
 
 # Run the test suite
 test:
-	pytest
+	poetry run pytest

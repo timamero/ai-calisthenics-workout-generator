@@ -10,6 +10,7 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard] (>=0.138.0,<0.139.0)",
     "pytest (>=9.1.1,<10.0.0)",
+    "black (>=26.5.1,<27.0.0)",
 ]
 
 [tool.poetry]

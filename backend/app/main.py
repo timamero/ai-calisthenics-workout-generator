@@ -1,12 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .core import config
+
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",  # Local web server
-    "http://127.0.0.1:8000",  # Origin for the local FastAPI server
-]
+origins = []
+
+if config.settings.environment == "local":
+    origins.append(config.settings.local_origin)
+    origins.append(config.settings.local_web_origin)
+if config.settings.environment == "production":
+    origins.append(config.settings.production_origin)
+    origins.append(config.settings.production_web_origin)
 
 app.add_middleware(
     CORSMiddleware,

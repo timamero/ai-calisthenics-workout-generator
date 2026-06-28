@@ -10,10 +10,10 @@ def get_set_progressions_list() -> List[SetProgressionsResponseSchema]:
     Returns:
         List of SetProgressionsResponseSchema objects
     """
-    supabase = get_supabase_client()
     try:
         response = (
-            supabase.table("set_progressions")
+            get_supabase_client()
+            .table("set_progressions")
             .select("*")
             .order("display_order")
             .execute()

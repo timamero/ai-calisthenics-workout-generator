@@ -3,6 +3,20 @@ from app.schemas.exercise import ExerciseFilterParams
 
 
 def get_exercises(filter_query: ExerciseFilterParams):
+    """Retrieve exercises from the database matching the provided filters.
+
+    Args:
+        filter_query (ExerciseFilterParams): Filtering options including
+            - `q`: optional search query for exercise name
+            - `muscles`: list of target muscles to match
+            - `equipments`: list of required equipment to match
+            - `difficulty`: difficulty level filter
+            - `emphasis`: emphasis filter
+
+    Returns:
+        list[dict] | None: A list of exercise records as returned by Supabase
+        (``response.data``) or ``None`` if an error occurs.
+    """
     supabase = get_supabase_client()
 
     muscles = filter_query.muscles

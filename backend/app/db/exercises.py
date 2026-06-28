@@ -17,8 +17,6 @@ def get_exercises(filter_query: ExerciseFilterParams):
         list[dict] | None: A list of exercise records as returned by Supabase
         (``response.data``) or ``None`` if an error occurs.
     """
-    supabase = get_supabase_client()
-
     muscles = filter_query.muscles
     equipments = filter_query.equipments
     difficulty = filter_query.difficulty
@@ -26,7 +24,7 @@ def get_exercises(filter_query: ExerciseFilterParams):
     q = filter_query.q
 
     try:
-        query = supabase.table("exercises").select("*")
+        query = get_supabase_client().table("exercises").select("*")
 
         conditions = ""
 

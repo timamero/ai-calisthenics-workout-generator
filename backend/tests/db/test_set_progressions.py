@@ -6,15 +6,16 @@ from app.db.set_progressions import get_set_progressions_list
 
 
 class TestGetSetProgressionsList:
+    """Tests for get_set_progressions_list function."""
+
     def test_get_set_progressions_list_success(
         self,
         mock_get_set_progressions_supabase_client,
+        mock_supabase_client,
         sample_set_progressions,
     ):
-        mock_client = mock_get_set_progressions_supabase_client
-        mock_table = mock_client.table.return_value
-        mock_query = mock_table.select.return_value
-        mock_query.order.return_value = mock_query
+        """Test retrieving and mapping set progressions from Supabase."""
+        mock_client, mock_table, mock_query = mock_supabase_client
 
         mock_response = Mock()
         mock_response.data = sample_set_progressions
@@ -34,12 +35,11 @@ class TestGetSetProgressionsList:
     def test_get_set_progressions_list_raises_and_logs(
         self,
         mock_get_set_progressions_supabase_client,
+        mock_supabase_client,
         capsys,
     ):
-        mock_client = mock_get_set_progressions_supabase_client
-        mock_table = mock_client.table.return_value
-        mock_query = mock_table.select.return_value
-        mock_query.order.return_value = mock_query
+        """Test that Supabase errors are logged and re-raised."""
+        mock_client, mock_table, mock_query = mock_supabase_client
         mock_query.execute.side_effect = Exception("Supabase failure")
 
         with pytest.raises(Exception, match="Supabase failure"):

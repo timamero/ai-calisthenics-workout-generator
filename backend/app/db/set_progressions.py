@@ -1,6 +1,6 @@
 from typing import List
 
-from app.schemas.setProgressions import SetProgressionsResponseSchema
+from backend.app.schemas.set_progressions import SetProgressionsResponseSchema
 from app.db.client import get_supabase_client
 
 

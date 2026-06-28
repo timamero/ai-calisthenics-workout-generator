@@ -7,7 +7,7 @@ class TestGetExercises:
     """Tests for get_exercises function."""
 
     def test_get_exercises_no_filters(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test getting all exercises with no filters applied."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -24,7 +24,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_with_muscle_filter(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises by target muscles."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -40,7 +40,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_with_multiple_muscles(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises by multiple target muscles."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -56,7 +56,7 @@ class TestGetExercises:
         mock_query.or_.assert_called_once()
 
     def test_get_exercises_with_equipment_filter(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises by required equipment."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -72,7 +72,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_with_muscles_and_equipment(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises by both muscles and equipment."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -88,7 +88,7 @@ class TestGetExercises:
         mock_query.or_.assert_called_once()
 
     def test_get_exercises_with_difficulty_filter(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises by difficulty level."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -104,7 +104,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_with_emphasis_filter(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises by emphasis type."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -120,7 +120,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_with_search_query(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test searching exercises by name with 'q' parameter."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -136,7 +136,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_with_all_filters(
-        self, mock_get_supabase_client, mock_supabase_client, sample_exercises
+        self, mock_get_exercises_supabase_client, mock_supabase_client, sample_exercises
     ):
         """Test filtering exercises with all filter parameters combined."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -161,7 +161,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_empty_result(
-        self, mock_get_supabase_client, mock_supabase_client
+        self, mock_get_exercises_supabase_client, mock_supabase_client
     ):
         """Test when no exercises match the filters."""
         mock_client, mock_table, mock_query = mock_supabase_client
@@ -176,7 +176,7 @@ class TestGetExercises:
         mock_query.execute.assert_called_once()
 
     def test_get_exercises_error_handling(
-        self, mock_get_supabase_client, mock_supabase_client, capsys
+        self, mock_get_exercises_supabase_client, mock_supabase_client, capsys
     ):
         """Test that errors are caught and printed."""
         mock_client, mock_table, mock_query = mock_supabase_client

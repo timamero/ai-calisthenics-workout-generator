@@ -1,6 +1,9 @@
 from fastapi import APIRouter
 
-from ...schemas.generate_workout import GenerateWorkoutRequestSchema
+from ...schemas.generate_workout import (
+    GenerateWorkoutRequestSchema,
+    GenerateWorkoutResponseSchema,
+)
 
 router = APIRouter(prefix="/generate-workout")
 
@@ -8,7 +11,9 @@ router = APIRouter(prefix="/generate-workout")
 @router.post(
     "/",
 )
-def generate_workout(request: GenerateWorkoutRequestSchema):
+def generate_workout(
+    request: GenerateWorkoutRequestSchema,
+) -> GenerateWorkoutResponseSchema:
     """Generate a workout plan from validated user input."""
     return {
         "workout": {
@@ -18,7 +23,7 @@ def generate_workout(request: GenerateWorkoutRequestSchema):
             "target_muscles": request.target_muscles,
             "duration_minutes": request.duration_minutes,
             "additional_notes": request.additional_notes,
-            "workout_data": {},
+            "workout_data": {"data": []},
         },
         "remaining_generations": 20,
     }

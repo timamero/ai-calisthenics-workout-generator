@@ -56,12 +56,152 @@ def sample_generated_workout():
     return {
         "workout": {
             "name": "Stub calisthenics workout",
-            "equipment": "pull up bar",
+            "equipment": ["pull up bar"],
             "fitness_level": "beginner",
-            "target_muscles": "upper back",
-            "duration_minutes": "PT30M",
+            "target_muscles": ["upper back"],
+            "duration_minutes": 45,
             "additional_notes": "additional notes",
-            "workout_data": [],
+            "workout_data": {
+                "data": [
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "sets": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "fields": {
+                                    "reps": 0,
+                                    "rest": "string",
+                                    "time": "string",
+                                    "setProgressions": [
+                                        {
+                                            "id": (
+                                                "00000000-0000-"
+                                                "0000-0000-"
+                                                "000000000000"
+                                            ),
+                                            "value": 0,
+                                            "set_progression_id": 0,
+                                        }
+                                    ],
+                                },
+                                "completed": True,
+                                "completed_at": "string",
+                            }
+                        ],
+                        "type": "exercise",
+                        "order": 0,
+                        "tracked": ["string"],
+                        "exercise_id": 0,
+                    },
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "name": "string",
+                        "type": "section",
+                        "items": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "sets": [
+                                    {
+                                        "id": "00000000-0000-0000-0000-000000000000",
+                                        "fields": {
+                                            "reps": 0,
+                                            "rest": "string",
+                                            "time": "string",
+                                            "setProgressions": [
+                                                {
+                                                    "id": "00000000-0000-"
+                                                    "0000-0000-000000000000",
+                                                    "value": 0,
+                                                    "set_progression_id": 0,
+                                                }
+                                            ],
+                                        },
+                                        "completed": True,
+                                        "completed_at": "string",
+                                    }
+                                ],
+                                "type": "exercise",
+                                "order": 0,
+                                "tracked": ["string"],
+                                "exercise_id": 0,
+                            },
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "type": "superset",
+                                "order": 0,
+                                "exercises": [
+                                    {
+                                        "id": "00000000-0000-0000-0000-000000000000",
+                                        "sets": [
+                                            {
+                                                "id": (
+                                                    "00000000-0000-"
+                                                    "0000-0000-"
+                                                    "000000000000"
+                                                ),
+                                                "fields": {
+                                                    "reps": 0,
+                                                    "rest": "string",
+                                                    "time": "string",
+                                                    "setProgressions": [
+                                                        {
+                                                            "id": "00000000-0000-0000-"
+                                                            "0000-000000000000",
+                                                            "value": 0,
+                                                            "set_progression_id": 0,
+                                                        }
+                                                    ],
+                                                },
+                                                "completed": True,
+                                                "completed_at": "string",
+                                            }
+                                        ],
+                                        "type": "exercise",
+                                        "order": 0,
+                                        "tracked": ["string"],
+                                        "exercise_id": 0,
+                                    }
+                                ],
+                            },
+                        ],
+                        "order": 0,
+                    },
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "type": "superset",
+                        "order": 0,
+                        "exercises": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "sets": [
+                                    {
+                                        "id": "00000000-0000-0000-0000-000000000000",
+                                        "fields": {
+                                            "reps": 0,
+                                            "rest": "string",
+                                            "time": "string",
+                                            "setProgressions": [
+                                                {
+                                                    "id": "00000000-0000-0000-"
+                                                    "0000-000000000000",
+                                                    "value": 0,
+                                                    "set_progression_id": 0,
+                                                }
+                                            ],
+                                        },
+                                        "completed": True,
+                                        "completed_at": "string",
+                                    }
+                                ],
+                                "type": "exercise",
+                                "order": 0,
+                                "tracked": ["string"],
+                                "exercise_id": 0,
+                            }
+                        ],
+                    },
+                ]
+            },
         },
         "remaining_generations": 20,
     }

@@ -8,8 +8,8 @@ export const WorkoutBase = z.object({
     z.literal('advanced'),
   ]),
   target_muscles: z.array(z.string()),
-  duration_minutes: z.number().int(),
-  additional_notes: z.string().nullish(),
+  duration_minutes: z.number(),
+  additional_notes: z.string().optional(),
 });
 
 const SetProgressionSchema = z.object({
@@ -22,7 +22,7 @@ const SetFieldsSchema = z.object({
   reps: z.nullable(z.number()),
   time: z.nullable(z.string()), // ISO 8601 duration
   rest: z.nullable(z.string()), // ISO 8601 duration
-  setProgressions: z.nullable(z.array(SetProgressionSchema)),
+  set_progressions: z.nullable(z.array(SetProgressionSchema)),
 });
 
 const SetSchema = z.object({
@@ -63,7 +63,11 @@ export const WorkoutDataSchema = z.object({
 export const GenerateWorkoutRequestSchema = WorkoutBase.extend({
   equipment: z.array(z.string()).min(1),
   target_muscles: z.array(z.string()).min(1),
-  duration_minutes: z.number().int().min(1),
+  duration_minutes: z.number().min(1),
+});
+
+export const GenerateWorkoutFormSchema = GenerateWorkoutRequestSchema.extend({
+  duration_minutes: z.coerce.number().min(5).max(120),
 });
 
 export const DetailedWorkout = WorkoutBase.extend({

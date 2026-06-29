@@ -6,6 +6,7 @@ export const mockGenerateWorkoutResponse = {
     target_muscles: ['back', 'core'],
     duration_minutes: 30,
     additional_notes: 'Avoid overhead pressing, shoulder issue',
+    notes: 'AI notes',
     workout_data: {
       data: [
         {

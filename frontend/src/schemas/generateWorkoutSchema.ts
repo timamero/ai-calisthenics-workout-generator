@@ -74,6 +74,7 @@ export const DetailedWorkout = WorkoutBase.extend({
   name: z.string(),
   duration_minutes: z.number().min(1),
   workout_data: WorkoutDataSchema,
+  notes: z.string().optional(),
 });
 
 export const GenerateWorkoutResponseSchema = z.object({

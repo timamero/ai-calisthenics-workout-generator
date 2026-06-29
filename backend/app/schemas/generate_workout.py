@@ -69,6 +69,7 @@ class WorkoutDataSchema(BaseModel):
 class DetailedWorkout(WorkoutBase):
     name: str
     workout_data: WorkoutDataSchema
+    notes: str | None = None
 
 
 class GenerateWorkoutResponseSchema(BaseModel):

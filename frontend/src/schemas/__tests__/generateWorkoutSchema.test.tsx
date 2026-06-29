@@ -190,6 +190,26 @@ describe('GenerateWorkoutResponseSchema', () => {
         target_muscles: ['legs'],
         duration_minutes: 20,
         workout_data: { ...mockGenerateWorkoutResponse.workout.workout_data },
+        notes: 'AI notes',
+      },
+    };
+
+    const result = GenerateWorkoutResponseSchema.safeParse(validInput);
+
+    expect(result.success).toBe(true);
+  });
+
+  it('allows notes to be omitted', () => {
+    const validInput = {
+      ...mockGenerateWorkoutResponse,
+      workout: {
+        name: 'Generated workout name',
+        equipment: ['pull up bar'],
+        fitness_level: 'beginner',
+        target_muscles: ['legs'],
+        duration_minutes: 20,
+        workout_data: { ...mockGenerateWorkoutResponse.workout.workout_data },
+        additional_notes: 'User notes',
       },
     };
 

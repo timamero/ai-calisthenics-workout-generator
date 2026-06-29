@@ -18,7 +18,7 @@ def generate_workout(request: GenerateWorkoutRequestSchema):
             "target_muscles": request.target_muscles,
             "duration_minutes": request.duration_minutes,
             "additional_notes": request.additional_notes,
-            "exercises": [],
+            "workout_data": {},
         },
         "remaining_generations": 20,
     }

@@ -22,7 +22,7 @@ const SetFieldsSchema = z.object({
   reps: z.nullable(z.number()),
   time: z.nullable(z.string()), // ISO 8601 duration
   rest: z.nullable(z.string()), // ISO 8601 duration
-  set_progressions: z.nullable(z.array(SetProgressionSchema)),
+  setProgressions: z.nullable(z.array(SetProgressionSchema)),
 });
 
 const SetSchema = z.object({
@@ -72,6 +72,7 @@ export const GenerateWorkoutFormSchema = GenerateWorkoutRequestSchema.extend({
 
 export const DetailedWorkout = WorkoutBase.extend({
   name: z.string(),
+  duration_minutes: z.number().min(1),
   workout_data: WorkoutDataSchema,
 });
 

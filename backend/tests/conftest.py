@@ -51,6 +51,23 @@ def mock_get_set_progressions_supabase_client(mock_supabase_client):
 
 
 @pytest.fixture
+def sample_generated_workout():
+    """Sample generated workout data."""
+    return {
+        "workout": {
+            "name": "Stub calisthenics workout",
+            "equipment": "pull up bar",
+            "fitness_level": "beginner",
+            "target_muscles": "upper back",
+            "duration_minutes": "PT30M",
+            "additional_notes": "additional notes",
+            "workout_data": [],
+        },
+        "remaining_generations": 20,
+    }
+
+
+@pytest.fixture
 def sample_exercises():
     """Sample exercise data."""
     return [

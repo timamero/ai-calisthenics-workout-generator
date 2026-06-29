@@ -9,7 +9,7 @@ help:
 
 # Run FastAPI in development mode
 dev:
-	poetry run fastapi dev
+	poetry run fastapi dev app/main.py
 
 # Run code formatting and linting checks
 lint:

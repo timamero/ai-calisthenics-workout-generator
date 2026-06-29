@@ -41,8 +41,9 @@ Respond with valid JSON only, matching this exact structure:
 
 {
   "workout": {
-    "duration_minutes": <integer>,
-    "workout_data": <json, json object based on the workout_data_json_schema below>,
+    "name": "<string, name for generated workout>"
+    "duration_minutes": "<integer>",
+    "workout_data": "<json, json object based on the workout_data_json_schema below>",
     "notes": "<string, optional guidance or rationale, or explanation if no
       exercises matched>"
   }

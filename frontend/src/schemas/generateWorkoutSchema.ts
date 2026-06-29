@@ -1,5 +1,17 @@
 import { z } from 'zod';
 
+export const WorkoutBase = z.object({
+  equipment: z.array(z.string()),
+  fitness_level: z.union([
+    z.literal('beginner'),
+    z.literal('intermediate'),
+    z.literal('advanced'),
+  ]),
+  target_muscles: z.array(z.string()),
+  duration_minutes: z.number().int(),
+  additional_notes: z.string().nullish(),
+});
+
 const SetProgressionSchema = z.object({
   id: z.string(),
   set_progression_id: z.number(),
@@ -46,4 +58,20 @@ const SectionSchema = z.object({
 
 export const WorkoutDataSchema = z.object({
   data: z.array(z.union([ExerciseSchema, SectionSchema, SupersetSchema])),
+});
+
+export const GenerateWorkoutRequestSchema = WorkoutBase.extend({
+  equipment: z.array(z.string()).min(1),
+  target_muscles: z.array(z.string()).min(1),
+  duration_minutes: z.number().int().min(1),
+});
+
+export const DetailedWorkout = WorkoutBase.extend({
+  name: z.string(),
+  workout_data: WorkoutDataSchema,
+});
+
+export const GenerateWorkoutResponseSchema = z.object({
+  workout: DetailedWorkout,
+  remaining_generations: z.number().int(),
 });

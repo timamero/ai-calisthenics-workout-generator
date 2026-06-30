@@ -9,7 +9,7 @@ help:
 
 # Run FastAPI in development mode
 dev:
-	poetry run fastapi dev app/main.py
+	poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 # Run code formatting and linting checks
 lint:

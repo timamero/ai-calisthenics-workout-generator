@@ -13,6 +13,7 @@ dependencies = [
     "black (>=26.5.1,<27.0.0)",
     "flake8 (>=7.3.0,<8.0.0)",
     "supabase (>=2.31.0,<3.0.0)",
+    "pytest-asyncio (>=1.4.0,<2.0.0)",
 ]
 
 [tool.poetry]
@@ -30,7 +31,3 @@ build-backend = "poetry.core.masonry.api"
 line-length = 88
 target-version = ['py313']
 skip-string-normalization = false
-[dependency-groups]
-dev = [
-    "pytest-asyncio (>=1.4.0,<2.0.0)"
-]

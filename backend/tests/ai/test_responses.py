@@ -22,7 +22,14 @@ class TestParseWorkoutResponse:
     @pytest.mark.skip(reason="not implemented yet")
     def test_invalid_json_response_raises_exception(self):
         """Test that an invalid JSON response raises an exception"""
-        invalid_response = "This is not a valid JSON response"
+        invalid_response = {
+            "workout": {
+                "name": "Sample Workout",
+                "workout_data": "This should be a dict, but it's a string",
+                "notes": "This is a summary",
+            },
+            "remaining_generations": 5,
+        }
 
         with pytest.raises(ValidationError):
             parse_workout_response(invalid_response)

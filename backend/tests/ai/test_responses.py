@@ -28,13 +28,17 @@ class TestParseWorkoutResponse:
             parse_workout_response(invalid_response)
 
     @pytest.mark.skip(reason="not implemented yet")
-    def test_response_with_missing_fields_raises_exception(
-        self, sample_generated_workout
-    ):
+    def test_response_with_missing_fields_raises_exception(self):
         """Test that a response with missing fields raises an exception"""
         # Remove the 'workout_data' field from the sample response
-        incomplete_response = sample_generated_workout.copy()
-        del incomplete_response["workout"]["workout_data"]
+        incomplete_response = {
+            "workout": {
+                "name": "Sample Workout",
+                # 'workout_data' is missing
+                "notes": "This is a summary",
+            },
+            "remaining_generations": 5,
+        }
 
         with pytest.raises(ValidationError):
             parse_workout_response(incomplete_response)

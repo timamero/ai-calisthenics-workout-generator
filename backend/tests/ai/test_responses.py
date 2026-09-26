@@ -2,6 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from app.ai.responses import parse_workout_response
+from app.schemas.generate_workout import GenerateWorkoutResponseSchema
 
 
 class TestParseWorkoutResponse:
@@ -12,10 +13,11 @@ class TestParseWorkoutResponse:
         """Test that a valid JSON response is parsed correctly"""
         parsed_workout = parse_workout_response(sample_generated_workout)
 
-        assert isinstance(parsed_workout, dict)
-        assert "workout" in parsed_workout
-        assert "exercises" in parsed_workout["workout"]
-        assert isinstance(parsed_workout["workout"]["exercises"], list)
+        validated = GenerateWorkoutResponseSchema.model_validate(parsed_workout)
+
+        assert isinstance(validated, GenerateWorkoutResponseSchema)
+        assert "workout" in validated.model_dump()
+        assert "remaining_generations" in validated.model_dump()
 
     @pytest.mark.skip(reason="not implemented yet")
     def test_invalid_json_response_raises_exception(self):
@@ -30,7 +32,7 @@ class TestParseWorkoutResponse:
         self, sample_generated_workout
     ):
         """Test that a response with missing fields raises an exception"""
-        # Remove the 'exercises' field from the sample response
+        # Remove the 'workout_data' field from the sample response
         incomplete_response = sample_generated_workout.copy()
         del incomplete_response["workout"]["workout_data"]
 

@@ -49,3 +49,39 @@ class TestParseWorkoutResponse:
 
         with pytest.raises(ValidationError):
             parse_workout_response(incomplete_response)
+
+    @pytest.mark.skip(reason="not implemented yet")
+    def test_response_without_exercise_element_raises_exception(
+        self, sample_generated_workout
+    ):
+        """Test that a workout without an exercise element raises an exception"""
+        workout_without_exercises = sample_generated_workout.copy()
+        workout_without_exercises["workout"] = sample_generated_workout[
+            "workout"
+        ].copy()
+        workout_data = sample_generated_workout["workout"]["workout_data"].copy()
+        workout_data["data"] = []
+
+        for item in sample_generated_workout["workout"]["workout_data"]["data"]:
+            if item["type"] == "section":
+                section = item.copy()
+                section["items"] = [
+                    nested_item
+                    for nested_item in item["items"]
+                    if nested_item["type"] != "exercise"
+                ]
+                section["items"] = [
+                    nested_item
+                    for nested_item in section["items"]
+                    if nested_item["type"] != "superset"
+                ]
+                workout_data["data"].append(section)
+            elif item["type"] == "superset":
+                superset = item.copy()
+                superset["exercises"] = []
+                workout_data["data"].append(superset)
+
+        workout_without_exercises["workout"]["workout_data"] = workout_data
+
+        with pytest.raises(ValidationError):
+            parse_workout_response(workout_without_exercises)

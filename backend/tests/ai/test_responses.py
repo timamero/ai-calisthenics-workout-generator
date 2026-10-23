@@ -1,5 +1,6 @@
+import json
+
 import pytest
-from pydantic import ValidationError
 
 from app.ai.responses import parse_workout_response
 from app.schemas.generate_workout import GenerateWorkoutResponseSchema
@@ -9,79 +10,78 @@ class TestParseWorkoutResponse:
     """Tests parse_workout_response function"""
 
     @pytest.mark.skip(reason="not implemented yet")
-    def test_valid_json_response_is_expected_structure(self, sample_generated_workout):
+    def test_valid_json_response_is_expected_structure(
+        self, sample_generated_workout_json
+    ):
         """Test that a valid JSON response is parsed correctly"""
-        parsed_workout = parse_workout_response(sample_generated_workout)
+        parsed_workout = parse_workout_response(sample_generated_workout_json)
 
-        validated = GenerateWorkoutResponseSchema.model_validate(parsed_workout)
-
-        assert isinstance(validated, GenerateWorkoutResponseSchema)
-        assert "workout" in validated.model_dump()
-        assert "remaining_generations" in validated.model_dump()
+        assert isinstance(parsed_workout, GenerateWorkoutResponseSchema)
+        assert parsed_workout.workout.name == "Stub calisthenics workout"
+        assert parsed_workout.remaining_generations == 20
 
     @pytest.mark.skip(reason="not implemented yet")
-    def test_invalid_json_response_raises_exception(self):
-        """Test that an invalid JSON response raises an exception"""
-        invalid_response = {
-            "workout": {
-                "name": "Sample Workout",
-                "workout_data": "This should be a dict, but it's a string",
-                "notes": "This is a summary",
-            },
-            "remaining_generations": 5,
-        }
+    def test_malformed_json_response_raises_descriptive_exception(self):
+        """Test that malformed JSON raises a descriptive exception"""
+        malformed_response = '{"workout": '
 
-        with pytest.raises(ValidationError):
-            parse_workout_response(invalid_response)
+        with pytest.raises(ValueError, match="JSON"):
+            parse_workout_response(malformed_response)
 
     @pytest.mark.skip(reason="not implemented yet")
-    def test_response_with_missing_fields_raises_exception(self):
-        """Test that a response with missing fields raises an exception"""
-        # Remove the 'workout_data' field from the sample response
-        incomplete_response = {
-            "workout": {
-                "name": "Sample Workout",
-                # 'workout_data' is missing
-                "notes": "This is a summary",
-            },
-            "remaining_generations": 5,
-        }
-
-        with pytest.raises(ValidationError):
-            parse_workout_response(incomplete_response)
-
-    @pytest.mark.skip(reason="not implemented yet")
-    def test_response_without_exercise_element_raises_exception(
+    def test_response_with_invalid_field_type_raises_descriptive_exception(
         self, sample_generated_workout
     ):
-        """Test that a workout without an exercise element raises an exception"""
-        workout_without_exercises = sample_generated_workout.copy()
-        workout_without_exercises["workout"] = sample_generated_workout[
-            "workout"
-        ].copy()
-        workout_data = sample_generated_workout["workout"]["workout_data"].copy()
-        workout_data["data"] = []
+        """Test that an invalid field type raises a descriptive exception"""
+        invalid_response = sample_generated_workout.copy()
+        invalid_response["workout"] = sample_generated_workout["workout"].copy()
+        invalid_response["workout"]["workout_data"] = "not an object"
 
-        for item in sample_generated_workout["workout"]["workout_data"]["data"]:
-            if item["type"] == "section":
-                section = item.copy()
-                section["items"] = [
-                    nested_item
-                    for nested_item in item["items"]
-                    if nested_item["type"] != "exercise"
-                ]
-                section["items"] = [
-                    nested_item
-                    for nested_item in section["items"]
-                    if nested_item["type"] != "superset"
-                ]
-                workout_data["data"].append(section)
-            elif item["type"] == "superset":
-                superset = item.copy()
-                superset["exercises"] = []
-                workout_data["data"].append(superset)
+        with pytest.raises(ValueError, match="workout_data"):
+            parse_workout_response(json.dumps(invalid_response))
 
-        workout_without_exercises["workout"]["workout_data"] = workout_data
+    @pytest.mark.skip(reason="not implemented yet")
+    def test_response_with_missing_workout_data_raises_descriptive_exception(
+        self, sample_generated_workout
+    ):
+        """Test that missing workout data raises a descriptive exception"""
+        incomplete_response = sample_generated_workout.copy()
+        incomplete_response["workout"] = sample_generated_workout["workout"].copy()
+        del incomplete_response["workout"]["workout_data"]
 
-        with pytest.raises(ValidationError):
-            parse_workout_response(workout_without_exercises)
+        with pytest.raises(ValueError, match="workout_data"):
+            parse_workout_response(json.dumps(incomplete_response))
+
+    @pytest.mark.skip(reason="not implemented yet")
+    def test_response_with_no_exercise_element_raises_descriptive_exception(
+        self, sample_workout_without_exercises
+    ):
+        """Test that a workout without any exercise raises a descriptive exception"""
+        with pytest.raises(ValueError, match="exercise"):
+            parse_workout_response(json.dumps(sample_workout_without_exercises))
+
+    @pytest.mark.skip(reason="not implemented yet")
+    def test_section_nested_exercise_is_accepted(self, sample_generated_workout):
+        """Test that an exercise nested in a section is accepted"""
+        section_response = sample_generated_workout.copy()
+        section_response["workout"] = sample_generated_workout["workout"].copy()
+        section_response["workout"]["workout_data"] = {
+            "data": [sample_generated_workout["workout"]["workout_data"]["data"][1]]
+        }
+
+        parsed_workout = parse_workout_response(json.dumps(section_response))
+
+        assert isinstance(parsed_workout, GenerateWorkoutResponseSchema)
+
+    @pytest.mark.skip(reason="not implemented yet")
+    def test_superset_nested_exercise_is_accepted(self, sample_generated_workout):
+        """Test that an exercise nested in a superset is accepted"""
+        superset_response = sample_generated_workout.copy()
+        superset_response["workout"] = sample_generated_workout["workout"].copy()
+        superset_response["workout"]["workout_data"] = {
+            "data": [sample_generated_workout["workout"]["workout_data"]["data"][2]]
+        }
+
+        parsed_workout = parse_workout_response(json.dumps(superset_response))
+
+        assert isinstance(parsed_workout, GenerateWorkoutResponseSchema)

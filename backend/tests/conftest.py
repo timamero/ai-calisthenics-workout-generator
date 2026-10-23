@@ -1,3 +1,6 @@
+import json
+from copy import deepcopy
+
 import pytest
 from httpx import AsyncClient, ASGITransport
 from unittest.mock import Mock, patch
@@ -205,6 +208,20 @@ def sample_generated_workout():
         },
         "remaining_generations": 20,
     }
+
+
+@pytest.fixture
+def sample_generated_workout_json(sample_generated_workout):
+    """Sample generated workout serialized as raw model output."""
+    return json.dumps(sample_generated_workout)
+
+
+@pytest.fixture
+def sample_workout_without_exercises(sample_generated_workout):
+    """Sample generated workout with no exercise elements."""
+    workout_without_exercises = deepcopy(sample_generated_workout)
+    workout_without_exercises["workout"]["workout_data"]["data"] = []
+    return workout_without_exercises
 
 
 @pytest.fixture
